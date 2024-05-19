@@ -4,7 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <!-- Added link to style.css-->
+  <link rel="stylesheet" href="style.css">
 </head>
+
+<header>
+  <!-- Added button for high score-->
+  <button id="highScorebtn">View Highscore</button>
+  <!-- Added id timer-->
+  <h3 id="timer-page">Time: <span id="timer"></span></h3>
+</header>
+
+<section>
+
+<section id="start-page">
+  <h1>Coding Quiz Challenge</h1>
+
+  <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+  <!-- Added button and id-->
+  <button id="start-button">Start Quiz</button>
+
+</section>
+  <!-- Create a question-->
+<section id="question-page" class="hide">
+
+</section>
+
+<section id="check-answer">
+
+  </section>
+
+  <section id="end-page" class="hide">
+
+    <h1>All Done!</h1>
+    <h4>Your final score is <span id="score"></span> .<h4>
+      <h4> Enter initials</h4>
+      <input id='initials' placeholder="your initials"></input>
+      <button id="scoreSubmit">Submit</button>
+
+  </section>
+
+  <section id="highscore" class="hide">
+    <h3>Initials: <span id="highscore-initials"></span></h3>
+    <h3>Score: <span id="highscore-score"></span></h3>
+  </section>
+<!-- Added script.js link-->
+<script src="script.js"></script>
+
 <body>
   
 </body>
