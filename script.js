@@ -134,10 +134,30 @@ document.getElementById('scoreSubmit').onclick = function() {
   localStorage.setItem('score', score)
   localStorage.setItem('initials', initials)
   viewHighScores()
-
 }
 
+document.getElementById('highScoreBtn').onclick= viewHighScores
+
+// Added fucntion to view high scores
+function viewHighScores () {
+  let initials = localStorage.getItem('initials')
+  let highScore = localStorage.getItem('score')
+  document.getElementById('end-page').classList.add('hide');
+  document.getElementById('start-page').classList.add('hide');
+  document.getElementById('question-page').classList.add('hide');
+  document.getElementById('check-answer').classList.remove('hide');
+  document.getElementById('timer-page').classList.remove('hide');
+
+  document.getElementById('highScore').classList.remove('hide');
+
+  document.getElementById('high-score').textContent = initials;
+  document.getElementById('highscore-score').textContent = highScore;
+
+}
     
+  //Added start button event listener
+  startButton.addEventListener("click", startQuiz)
+questionPage.addEventListener("click", nextQuestion)
     
     
 
