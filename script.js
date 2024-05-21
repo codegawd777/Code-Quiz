@@ -11,29 +11,29 @@ var option4button = document.querySelector("#option-4")
 
 var endPage = document.querySelector("#end-page")
 // Created quiz questions
-var questionArray = [
-{
-  text: "What is 1 = 1?",
-  options : ["5", "3", "2", "4"],
-  answer: '2'
-},
-{
-  text: "What is the color of the sky?",
-  options : ["Blue", "Red", "Yellow", "white"],
-  answer: 'Blue'
-},
-{
-
-  text: "What is the day today?",
-  options : ["Monday", "Tuesday", "Friday", "Sunday"],
-  answer: 'Friday'
-}
+var questionsArray = [
+  {
+    text: "What is 1 = 1?",
+    options: ["5", "3", "2", "4"],
+    answer: '2'
+  },
+  {
+    text: "What is the color of the sky?",
+    options: ["Blue", "Red", "Yellow", "white"],
+    answer: 'Blue'
+  },
+  {
+    // Change question and answers
+    text: "What is the shape of the earth?",
+    options: ["Flat", "Square", "Round", "Triangle"],
+    answer: 'Round'
+  }
 
 
 ]
 
 var currentNumber = 0;
-var time=21
+var time = 21
 let score = 21;
 // Added fucntion to start the quiz
 function startQuiz() {
@@ -43,84 +43,84 @@ function startQuiz() {
   document.getElementById('timer-page').classList.remove('hide');
 
   //start timer
-let myInterval = setInterval(()=>{
-time--;
+  let myInterval = setInterval(() => {
+    time--;
 
-if(time>=0){
-  if(currentNumber < questionsArray.length){
-      document.getElementById('timer').textContent = time
-  }else{
+    if (time >= 0) {
+      if (currentNumber < questionsArray.length) {
+        document.getElementById('timer').textContent = time
+      } else {
+        clearInterval(myInterval)
+        questionPage.classList.add('hide')
+        endPage.classList.remove('hide')
+        score = time
+        document.getElementById('score').textContent = score
+      }
+    } else {
       clearInterval(myInterval)
+      document.getElementById('timer').textContent = 0
       questionPage.classList.add('hide')
       endPage.classList.remove('hide')
       score = getScore()
-  document.getElementById('score').textContent = score
-  }
-}else{
-  clearInterval(myInterval)
-  document.getElementById('timer').textContent = 0
-  questionPage.classList.add('hide')
-  endPage.classList.remove('hide')
-  score = getScore()
-  document.getElementById('score').textContent = 0
+      document.getElementById('score').textContent = 0
 
-}
+    }
 
-},1000)
+  }, 1000)
 
 
-showQuestion()
+  showQuestion()
 
 }
 
 
 
-// Added fucntion to get score
-if (time >0 ) {
-  score = time+1
-}else {
-  score = 0
+// // Added fucntion to get score
+// if (time >0 ) {
+//   score = time+1
+// }else {
+//   score = 0
+//   return score
 
-}
-return score
+// }
+
 
 
 //Added fucntion to show next question
 function nextQuestion(e) {
-// Added console.log
-  console.log(questionArray[currentNumber].answer);
+  // Added console.log
+  console.log(questionsArray[currentNumber].answer);
   console.log(e.target.innerText)
 
-  if(e.target.innerText === questionArray[currentNumber].answer)
-  {
-    document.getElementById('check-answer').innerHTML=<h3>Correct</h3>
+  if (e.target.innerText === questionsArray[currentNumber].answer) {
+    document.getElementById('check-answer').innerHTML = "<h3>Correct</h3>"
 
-  }else{
-    document.getElementById('check-answer').innerHTML=<h3>Wrong</h3>
+  } else {
+    document.getElementById('check-answer').innerHTML = "<h3>Wrong</h3>"
 
-    time-= 3;
+    time -= 3;
 
   }
 
   setTimeout(() => {
-    document.getElementById('check-answer').innerHTML=''
+    document.getElementById('check-answer').innerHTML = ''
     currentNumber++;
     showQuestion()
-    }, 1000)
+  }, 1000)
 
+}
+
+// Added fucntion to show question`
+function showQuestion() {
+
+  if (currentNumber === questionsArray.length) {
+    questionPage.classList.add('hide')
+    endPage.classList.remove('hide')
+    let score = time
+    document.getElementById('score').textContent = score
+    return
   }
-
-  // Added fucntion to show question`
-  function showQuestion(){
-
-    if(currentNumber === questionsArray.length){
-        questionPage.classList.add('hide')
-endPage.classList.remove('hide')
-let score = getScore()
-document.getElementById('score').textContent = score
-return
-    }
-    questionPage.innerHTML= 
+  questionPage.innerHTML =
     `<h1 id="question-text">${questionsArray[currentNumber].text}</h1>
     <button id="option-1">${questionsArray[currentNumber].options[0]}</button>
     <button id="option-2">${questionsArray[currentNumber].options[1]}</button>
@@ -129,17 +129,17 @@ return
     `
 }
 
-document.getElementById('scoreSubmit').onclick = function() {
+document.getElementById('scoreSubmit').onclick = function () {
   let initials = document.getElementById('initials').value;
   localStorage.setItem('score', score)
   localStorage.setItem('initials', initials)
   viewHighScores()
 }
 
-document.getElementById('highScoreBtn').onclick= viewHighScores
+document.getElementById('highScorebtn').onclick = viewHighScores
 
 // Added fucntion to view high scores
-function viewHighScores () {
+function viewHighScores() {
   let initials = localStorage.getItem('initials')
   let highScore = localStorage.getItem('score')
   document.getElementById('end-page').classList.add('hide');
@@ -148,21 +148,20 @@ function viewHighScores () {
   document.getElementById('check-answer').classList.remove('hide');
   document.getElementById('timer-page').classList.remove('hide');
 
-  document.getElementById('highScore').classList.remove('hide');
+  document.getElementById('highscore').classList.remove('hide');
 
-  document.getElementById('high-score').textContent = initials;
+  document.getElementById('highscore-initials').textContent = initials;
   document.getElementById('highscore-score').textContent = highScore;
 
 }
-    
-  //Added start button event listener
-  startButton.addEventListener("click", startQuiz)
+
+//Added start button event listener
+startButton.addEventListener("click", startQuiz)
 questionPage.addEventListener("click", nextQuestion)
-    
-    
 
 
 
 
 
-  
+
+
